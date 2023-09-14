@@ -1,0 +1,46 @@
+# Parent/base configuration which is extended via environment specific configurations
+
+# Common Configurations
+server:
+  servlet:
+    context-path: /relational-mappings-app
+
+spring:
+  application:
+    name: relational-mappings-app
+  profiles:
+    default: local
+  datasource:
+    url: jdbc:${spring.datasource.driver}://${spring.datasource.host}:${spring.datasource.port}/${spring.datasource.database}?schema=${spring.datasource.schema}
+    # Connection pooling (Hikari)
+    driverClassName: org.postgresql.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      connection-timeout: ${spring.datasource.connectionPool.timeout}
+      idle-timeout: ${spring.datasource.connectionPool.idleTimeout}
+      max-lifetime: ${spring.datasource.connectionPool.maxLifetime}
+      maximum-pool-size: ${spring.datasource.connectionPool.maximumPoolSize}
+      minimum-idle: ${spring.datasource.connectionPool.minimumIdle}
+  # Liquibase configurations
+  liquibase:
+    enabled: ${spring.liquibaseConfig.isEnabled}
+    url: ${spring.datasource.url}
+    user: ${spring.datasource.username}
+    password: ${spring.datasource.password}
+    change-log: classpath:/db/liquibase/changelog-master.xml
+
+# Management endpoints related configurations
+management:
+  trace:
+    http:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: health,prometheus,env,info,metrics,threaddump,httpexchanges,mappings
+      base-path: /management
+  endpoint:
+    health:
+      probes:
+        enabled: true
+      show-details: always

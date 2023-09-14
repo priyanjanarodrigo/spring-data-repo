@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Liquibase Changelog CL-0 -->
+<databaseChangeLog
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+  
+  <changeSet id="CL-0-CS-0" author="Priyanjana">
+    <createTable tableName="EMPLOYEE">
+      <column name="ID" type="UUID">
+        <constraints nullable="false" primaryKey="true" primaryKeyName="EMPLOYEE_PK"/>
+      </column>
+      <column name="FIRST_NAME" type="VARCHAR(255)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="LAST_NAME" type="VARCHAR(255)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="DATE_OF_BIRTH" type="DATE">
+        <constraints nullable="false"/>
+      </column>
+      <column name="GENDER" type="VARCHAR(255)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="IS_MARRIED" type="BOOLEAN">
+        <constraints nullable="false"/>
+      </column>
+      <column name="PHONE_NUMBER" type="VARCHAR(255)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="EMAIL" type="VARCHAR(255)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="SALARY" type="DOUBLE PRECISION">
+        <constraints nullable="false"/>
+      </column>
+      <column name="CITY" type="VARCHAR(255)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="IS_PERMANENT" type="BOOLEAN">
+        <constraints nullable="false"/>
+      </column>
+      <column name="DATE_JOINED" type="DATE">
+        <constraints nullable="false"/>
+      </column>
+      <column name="SHIRT_SIZE" type="VARCHAR(255)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="DEPARTMENT_ID" type="UUID">
+        <constraints nullable="false"/>
+      </column>
+      <column name="CREATION_TIMESTAMP" type="TIMESTAMP WITHOUT TIME ZONE">
+        <constraints nullable="false"/>
+      </column>
+      <column name="UPDATED_TIMESTAMP" type="TIMESTAMP WITHOUT TIME ZONE">
+        <constraints nullable="false"/>
+      </column>
+      <column name="CREATED_BY" type="VARCHAR(255)">
+        <constraints nullable="true"/>
+      </column>
+      <column name="LAST_MODIFIED_BY" type="VARCHAR(255)">
+        <constraints nullable="true"/>
+      </column>
+    </createTable>
+  </changeSet>
+
+  <changeSet id="CL-0-CS-1" author="Priyanjana">
+    <createTable tableName="DEPARTMENT">
+      <column name="ID" type="UUID">
+        <constraints nullable="false" primaryKey="true" primaryKeyName="DEPARTMENT_PK"/>
+      </column>
+      <column name="NAME" type="VARCHAR(255)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="DESCRIPTION" type="VARCHAR(255)">
+        <constraints nullable="true"/>
+      </column>
+      <column name="CREATION_TIMESTAMP" type="TIMESTAMP WITHOUT TIME ZONE">
+        <constraints nullable="false"/>
+      </column>
+      <column name="UPDATED_TIMESTAMP" type="TIMESTAMP WITHOUT TIME ZONE">
+        <constraints nullable="false"/>
+      </column>
+      <column name="CREATED_BY" type="VARCHAR(255)">
+        <constraints nullable="true"/>
+      </column>
+      <column name="LAST_MODIFIED_BY" type="VARCHAR(255)">
+        <constraints nullable="true"/>
+      </column>
+    </createTable>
+  </changeSet>
+
+  <!-- onDelete/onUpdate values: CASCADE, SET NULL, SET DEFAULT, RESTRICT, NO ACTION-->
+  <changeSet id="CL-0-CS-2" author="Priyanjana">
+    <addForeignKeyConstraint
+      constraintName="DEPARTMENT_FK"
+      baseTableName="EMPLOYEE"
+      baseColumnNames="DEPARTMENT_ID"
+      referencedTableName="DEPARTMENT"
+      referencedColumnNames="ID"
+      onDelete="RESTRICT"
+      onUpdate="RESTRICT"
+    />
+  </changeSet>
+</databaseChangeLog>

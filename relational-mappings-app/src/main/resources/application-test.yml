@@ -1,0 +1,21 @@
+# test environment specific configurations
+server:
+  port: 8081
+
+spring:
+  liquibaseConfig:
+    isEnabled: true
+  datasource:
+    host: localhost
+    port: 5432
+    driver: postgresql
+    database: relational-mappings-app-db-local
+    schema: public
+    username: postgres
+    password: postgres@123
+    connectionPool:
+      timeout: 30000
+      idleTimeout: 600000
+      maxLifetime: 1800000
+      maximumPoolSize: 30
+      minimumIdle: 10
